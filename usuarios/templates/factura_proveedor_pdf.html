@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factura Proveedor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .details {
+            margin: 20px 0;
+        }
+        .total {
+            margin-top: 30px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Factura Proveedor</h1>
+        <p>Número: {{ factura.numero_factura }}</p>
+    </div>
+    
+    <div class="details">
+        <p><strong>Proveedor:</strong> {{ factura.proveedor.nombre }}</p>
+        <p><strong>Fecha Emisión:</strong> {{ factura.fecha_emision }}</p>
+        <p><strong>Fecha Vencimiento:</strong> {{ factura.fecha_vencimiento }}</p>
+    </div>
+    
+    <div class="total">
+        <p><strong>Monto Total:</strong> ${{ factura.monto_total }}</p>
+        {% if penalizacion > 0 %}
+        <p><strong>Penalización:</strong> ${{ penalizacion }}</p>
+        <p><strong>Total con Penalización:</strong> ${{ monto_total_actualizado }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
