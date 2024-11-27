@@ -51,3 +51,16 @@ class ProveedorSerializer(serializers.ModelSerializer):
         fields = ['id', 'nombre', 'email']  # Campos que serán incluidos en la serialización
 
 #--------------------------------------------------------------------
+
+
+class FacturaSerializer(serializers.ModelSerializer):
+    cliente_nombre = serializers.CharField(source='cliente.nombre', read_only=True)
+    proveedor_nombre = serializers.CharField(source='proveedor.nombre', read_only=True)  # Agregado para el nombre del proveedor
+
+    class Meta:
+        model = Factura
+        fields = [
+            'id', 'numero_factura', 'proveedor', 'proveedor_nombre',  # Agregado proveedor_nombre
+            'cliente', 'cliente_nombre',
+            'fecha_emision', 'fecha_vencimiento', 'monto_total', 'estado', 'penalizacion'
+        ]
