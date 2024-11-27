@@ -19,7 +19,7 @@ from datetime import timedelta
 from django.db.models import Sum, Count
 from datetime import date
 
-
+#----------- PARTE DE JHON----------------------
 class RegistroView(APIView):
     # Método para manejar solicitudes POST
     def post(self, request):
@@ -138,3 +138,40 @@ class UsuarioCRUDView(APIView):
             return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
         
 #-----------------------------------------------------------------------
+# Clase para manejar las operaciones relacionadas con Clientes
+class ClienteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    # Maneja solicitudes GET para obtener todos los clientes
+    def get(self, request):
+        clientes = Cliente.objects.all()
+        serializer = ClienteSerializer(clientes, many=True)
+        return Response(serializer.data)
+
+    # Maneja solicitudes POST para crear un nuevo cliente
+    def post(self, request):
+        serializer = ClienteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Clase para manejar las operaciones relacionadas con Proveedores
+class ProveedorView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        proveedores = Proveedor.objects.all()
+        serializer = ProveedorSerializer(proveedores, many=True)
+        return Response(serializer.data)
+
+    # Maneja solicitudes POST para crear un nuevo proveedor
+    def post(self, request):
+        serializer = ProveedorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+#--------------------------ASTA AQUI -----------------------------------------------------

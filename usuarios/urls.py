@@ -4,15 +4,8 @@ from .views import (
     LoginView,
     UsuarioCRUDView,
     ClienteView,
-    ProveedorView,
-    FacturaView,
-    ExportarPDF,
-    ImportarCSV,
-    FacturasPorProveedorView,
-    ImportarFacturasProveedoresCSV,
-    NotificacionesView,
-    ObtenerRolUsuarioView,
-    EstadisticasDashboardView
+    ProveedorView,#-------JK
+  
 )
 urlpatterns = [
     # Registro y autenticación
@@ -22,6 +15,9 @@ urlpatterns = [
     # Gestión de usuarios
     path('', UsuarioCRUDView.as_view(), name='usuarios_crud'),
     path('<int:pk>/', UsuarioCRUDView.as_view(), name='usuario_crud_detail'),
+    # Clientes y Proveedores
+    path('clientes/', ClienteView.as_view(), name='clientes'),
+    path('proveedores/', ProveedorView.as_view(), name='proveedores'),
 
 
 ]
